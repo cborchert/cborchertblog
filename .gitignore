@@ -1,0 +1,15 @@
+# Project dependencies
+.cache
+node_modules
+yarn-error.log
+.vscode
+
+# Build directory
+/public
+.DS_Store
+
+# Private directories
+/src/content/draft
+/src/content/draft/**/*
+/src/content/private/
+/src/content/private/**/*

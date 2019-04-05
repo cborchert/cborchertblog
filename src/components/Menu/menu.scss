@@ -1,0 +1,41 @@
+@import '../../assets/scss/vars.scss';
+
+.off-page-menu {
+  position: fixed;
+  left: 100vw;
+  top: 0;
+  height: 100vh;
+  width: 300px;
+  background: $blueLight;
+  color: $white;
+  padding: 30px;
+  // text-align: right;
+  font-family: $fontSerif;
+  letter-spacing: 0.5px;
+  &__close {
+    font-family: $fontSans;
+    margin-bottom: 30px;
+    &:after {
+      display: none;
+    }
+  }
+  &__links {
+    font-size: 2.4rem;
+    li {
+      margin-bottom: 20px;
+    }
+  }
+  a {
+    &,
+    &:link,
+    &:hover,
+    &:focus,
+    &:visited,
+    &:active {
+      color: $white;
+      &:after {
+        background-color: $white;
+      }
+    }
+  }
+}

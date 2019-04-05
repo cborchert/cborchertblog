@@ -1,0 +1,23 @@
+@import '../assets/scss/vars.scss';
+.about {
+  &__inner {
+    text-align: center;
+    font-size: 1.5em;
+    max-width: 800px;
+    margin: 0 auto;
+    h1 {
+      font-family: $fontSerif;
+      letter-spacing: 1px;
+    }
+    p {
+      line-height: 1.6;
+    }
+  }
+  &__avatar {
+    width: 250px;
+    max-width: 95%;
+    margin: 40px auto 40px;
+    overflow: hidden;
+    border-radius: 100%;
+  }
+}

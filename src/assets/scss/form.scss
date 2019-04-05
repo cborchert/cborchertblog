@@ -1,0 +1,127 @@
+@import './vars';
+.form-container {
+  &:after {
+    content: ' ';
+    display: block;
+    color: $black;
+    text-align: left;
+    font-size: 1.6rem;
+    font-family: $fontSans;
+    text-align: center;
+  }
+  &.success {
+    form {
+      display: none;
+    }
+    &:after {
+      content: 'Thank you! Your message has been sent.';
+      font-size: 3rem;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+  &.sending {
+    form {
+      display: none;
+    }
+    &:after {
+      content: 'Sending your message...';
+      text-align: center;
+    }
+  }
+
+  &.error {
+    &:after {
+      content: 'Something went wrong. Please try again.';
+      color: $red;
+    }
+  }
+}
+form {
+  max-width: $widthSmall;
+  margin: 2rem auto;
+  font-family: $fontSans;
+}
+label {
+  display: block;
+  padding-top: 3rem;
+  transition: 300ms;
+  &.invalid {
+    color: $red;
+  }
+}
+input[type='text'],
+input[type='email'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+input[type='text'],
+input[type='email'] {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba($black, 0.5);
+  padding: 0.5rem;
+  transition: 300ms;
+  &:active,
+  &:focus {
+    border-bottom: 1px solid $black;
+  }
+  &.invalid {
+    border-bottom: 1px solid rgba($red, 0.5);
+
+    &:active,
+    &:focus {
+      border-bottom: 1px solid $red;
+    }
+  }
+}
+textarea {
+  min-height: 250px;
+  outline: none;
+  border: 1px solid rgba($black, 0.5);
+  padding: 1rem;
+}
+fieldset {
+  margin-top: 3rem;
+  label {
+    padding-top: 0.5rem;
+    padding-bottom: 0rem;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+  }
+  legend {
+    margin-bottom: 1rem;
+  }
+}
+.optional-form-section {
+  max-height: 0;
+  opacity: 0;
+  transition: 600ms;
+  overflow: hidden;
+  &--show {
+    max-height: 1500px;
+    overflow-y: auto;
+    opacity: 1;
+  }
+}
+.form-errors {
+  margin: 2rem 0;
+  text-align: left;
+  color: $red;
+  .form-error {
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    margin: 0;
+  }
+}
+.form-footer {
+  margin: 2rem 0;
+  text-align: right;
+}

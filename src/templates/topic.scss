@@ -1,0 +1,13 @@
+@import '../assets/scss/vars.scss';
+.single-topic {
+  &__header {
+    h1 {
+      font-family: $fontSerif;
+    }
+  }
+  &__body {
+    margin: 50px auto 80px;
+  }
+  &__footer {
+  }
+}

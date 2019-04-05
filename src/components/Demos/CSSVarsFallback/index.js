@@ -1,0 +1,50 @@
+import React, { Component } from 'react'
+import './css-vars-fallback.scss'
+
+export default class CSSVarsFallback extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      theme: 'default',
+    }
+  }
+
+  switchTheme = () => {
+    const themes = ['default', 'dark', 'blue', 'red']
+    let themeIndex = themes.indexOf(this.state.theme) + 1
+    if (themeIndex >= themes.length) {
+      themeIndex = 0
+    }
+    const theme = themes[themeIndex]
+    this.setState({
+      ...this.state,
+      theme,
+    })
+  }
+
+  render() {
+    const { theme } = this.state
+    return (
+      <div
+        className={`css-vars-fallback-demo css-vars-fallback-demo--${theme}`}
+      >
+        <h2>Using theme: "{theme}"</h2>
+        <button
+          className="css-vars-fallback-demo__button"
+          onClick={this.switchTheme}
+        >
+          Switch Theme
+        </button>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    )
+  }
+}

@@ -1,0 +1,41 @@
+@import './vars';
+
+.animated-underline {
+  position: relative;
+  // display: block;
+  // float: left;
+  display: inline-block;
+  line-height: 1.125;
+
+  &:after {
+    display: block;
+    content: ' ';
+    height: 2px;
+    width: 0;
+    background-color: $black;
+    transition: 400ms ease;
+    // margin-top: -0.125rem;
+  }
+  &:hover:after {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}

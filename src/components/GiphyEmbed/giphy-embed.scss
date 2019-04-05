@@ -1,0 +1,16 @@
+.giphy-embed {
+  margin: 40px auto;
+  iframe {
+  }
+  &__center {
+    text-align: center;
+    iframe {
+      margin: 0 auto;
+    }
+  }
+  &__circle {
+  }
+  p {
+    font-size: 1rem;
+  }
+}

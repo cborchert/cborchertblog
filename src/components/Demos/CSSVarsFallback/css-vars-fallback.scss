@@ -1,0 +1,159 @@
+//THIS COMMENTED OUT VERSION is a good place for creating themes without the use of css variables
+//Assigning our variables, generally
+// $white: #eee;
+// $black: #1b2d40;
+// $blue: #287cb4;
+// $red: #e74c3c;
+
+//creating a map for our theme
+//see https://www.sitepoint.com/using-sass-maps/
+// $vars: (
+//   background--default: $white,
+//   foreground--default: $black,
+//   highlight--default: $blue,
+//   highlight: $blue,
+//   background--dark: $black,
+//   foreground--dark: $white,
+//   highlight--dark: $red,
+// );
+
+// //this mixin allows you to assign a property to a variablename
+// @mixin var($property, $varName) {
+//   #{$property}: map-get($vars, $varName);
+// }
+
+// //For creating themes
+// @mixin createTheme($themeName) {
+//   $parentSelector: &;
+//   $themeSelector: '--#{$themeName}';
+//   @if $themeName == '' {
+//     $themeSelector: '';
+//   }
+
+//   &--#{$themeName} {
+//     @include var('border-color', 'highlight#{$themeSelector}');
+//     @include var('background-color', 'background#{$themeSelector}');
+//     @include var('color', 'foreground#{$themeSelector}');
+//     #{$parentSelector}__button {
+//       @include var('background-color', 'highlight#{$themeSelector}');
+//     }
+//   }
+// }
+
+// // VERSION 1
+
+// $white: #eee;
+// $black: #1b2d40;
+// $blue: #287cb4;
+// $red: #e74c3c;
+
+// @mixin createTheme($themeName, $bg, $fg, $highlight) {
+//   $parentSelector: &;
+//   $themeSelector: '--#{$themeName}';
+//   @if $themeName == '' {
+//     $themeSelector: '';
+//   }
+
+//   &#{$themeSelector} {
+//     border-color: #{$highlight};
+//     background-color: #{$bg};
+//     color: #{$fg};
+//     #{$parentSelector}__button {
+//       &,
+//       &:focus,
+//       &:active,
+//       &:hover {
+//         background-color: #{$highlight};
+//       }
+//     }
+//   }
+// }
+
+// //Basic styling of our element
+// .css-vars-fallback-demo {
+//   border: 2px solid transparent;
+//   padding: 20px;
+//   margin: 20px 0;
+//   h2 {
+//     margin-top: 0;
+//   }
+//   &__button {
+//     margin: 0 0 20px;
+//   }
+//   @include createTheme('', $white, $black, $blue);
+//   @include createTheme('default', $white, $black, $blue);
+//   @include createTheme('dark', $black, $white, $red);
+//   @include createTheme('red', $red, $white, $black);
+//   @include createTheme('blue', $blue, $white, $black);
+// }
+
+// VERSION 2
+
+// Assigning our variables, generally
+$white: #eee;
+$black: #1b2d40;
+$blue: #287cb4;
+$red: #e74c3c;
+
+//creating a map of variables for our theme
+//see https://www.sitepoint.com/using-sass-maps/
+$vars: (
+  background: $white,
+  foreground: $black,
+  highlight: $blue,
+);
+
+//create our css variables using an each loop
+//see https://www.sitepoint.com/using-sass-maps/
+//under the heading Repetitive Stuff
+:root {
+  @each $name, $var in $vars {
+    --#{$name}: #{$var};
+  }
+}
+
+//this mixin allows you to assign a property to a variablename
+@mixin var($property, $varName) {
+  //CSS default
+  #{$property}: map-get($vars, $varName);
+  //CSS variable definition
+  #{$property}: var(--#{$varName});
+}
+
+//For creating themes using just the css variables
+@mixin createTheme($themeName, $bg, $fg, $highlight) {
+  &--#{$themeName} {
+    --background: #{$bg};
+    --foreground: #{$fg};
+    --highlight: #{$highlight};
+  }
+}
+
+//Basic styling of our element
+.css-vars-fallback-demo {
+  border: 2px solid transparent;
+  padding: 20px;
+  margin: 20px 0;
+
+  //This will assign the default values
+  @include var('border-color', 'highlight');
+  @include var('background-color', 'background');
+  @include var('color', 'foreground');
+
+  h2 {
+    margin-top: 0;
+  }
+  &__button {
+    margin: 0 0 20px;
+    &,
+    &:focus,
+    &:active,
+    &:hover {
+      @include var('background-color', 'highlight');
+    }
+  }
+  //These will assign values to the variables in the context of the themename
+  @include createTheme('dark', $black, $white, $red);
+  @include createTheme('red', $red, $white, $black);
+  @include createTheme('blue', $blue, $white, $black);
+}
