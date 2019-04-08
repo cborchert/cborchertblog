@@ -62,7 +62,23 @@ export default function Template({
     'cover_image.childImageSharp.fluid',
     null
   )
-  const coverImagePublicUrl = get(frontmatter, 'cover_image.publicURL', '')
+  console.log(frontmatter)
+  const coverImagePublicUrl = `https://cborchert.blog${get(
+    frontmatter,
+    'cover_image.childImageSharp.fixed.src',
+    ''
+  )}`
+  const coverImageHeight = get(
+    frontmatter,
+    'cover_image.childImageSharp.fixed.height',
+    ''
+  )
+  const coverImageWidth = get(
+    frontmatter,
+    'cover_image.childImageSharp.fixed.width',
+    ''
+  )
+
   const coverImage = coverImageSrcSet ? <Img fluid={coverImageSrcSet} /> : ''
   const postClasses = classSet({
     'blog-post': true,
@@ -128,7 +144,10 @@ export default function Template({
             "Chris Borchert's blog about javascript, react, and web development"
           }
         />
+        <meta property="twitter:card" content="summary" />
         <meta property="og:image" content={coverImagePublicUrl} />
+        <meta property="og:image:width" content={coverImageWidth} />
+        <meta property="og:image:height" content={coverImageHeight} />
         <meta property="twitter:image" content={coverImagePublicUrl} />
 
         <meta
@@ -208,14 +227,12 @@ export const pageQuery = graphql`
         description
         cover_image {
           publicURL
-          # childImageSharp {
-          #   sizes(maxWidth: 1240) {
-          #     srcSet
-          #   }
-          # }
           childImageSharp {
             fluid(maxWidth: 900, maxHeight: 600) {
               ...GatsbyImageSharpFluid
+            }
+            fixed(width: 1200, height: 628) {
+              ...GatsbyImageSharpFixed
             }
           }
         }
