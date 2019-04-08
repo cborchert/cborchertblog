@@ -29,6 +29,8 @@ let value = values[0]
 // value = 3
 ```
 
+Why bother with the `[0]`? Why write more code when less will do (especially if the new code is at least as readible as the old code)?
+
 ## The problem
 
 Imagine that you want to pick the first object in an array which matches a specific set of criteria.
@@ -141,42 +143,65 @@ The difference between this solution and the `filter` solution is slight but we'
 
 ## Wrap up
 
-So in the end, who's the winner? For me, the obvious answer is "not Array.prototype.filter." The filter method is super useful, but it is also meant for situations when we're expecting more than one result or for the result to be returned as an array. In our case, it is simply the wrong tool, and we end up spending mental energy, processing time, and characters to bend the tool to our uses. 
+So in the end, who's the winner? For me, the obvious answer is "not Array.prototype.filter." The filter method is super useful, but it is also meant for situations when we're expecting more than one result or for the result to be returned as an array. In our case, it is simply the wrong tool, and we end up spending mental energy, processing time, and characters to bend the tool to our uses.
 
 That said, in this specific example, I'd say, with a big caveat, that the most fitting solution is actually the classic for loop. I say this because:
- - it is absolutely clear what is going on in the code
- - we don't need to allocate an arrow function to memory, so why do it?
- - we are in control, using `break` of just how much code to run
- - the job that is called for doesn't require anything more than a for loop, and I'm not certain, but I'm pretty sure a for loop is more efficient than an array method
+
+- it is absolutely clear what is going on in the code
+- we don't need to allocate an arrow function to memory, so why do it?
+- we are in control, using `break` of just how much code to run
+- the job that is called for doesn't require anything more than a for loop, and I'm not certain, but I'm pretty sure a for loop is more efficient than an array method
 
 Of course, I said that there's a caveat, and there are in fact several reasons to use Array.prototype.find. Consider the following:
 
-1) The "new" array methods like find, filter, map, some, and any are self documenting. When I see `colors.find` I know what to expect without a comment: we'll be picking out a single entry from our array.  When I see `for (let i = 0; i < colors.length; i++)`, however, I only know that we'll be looping over the array.
+1. The "new" array methods like find, filter, map, some, and any are self documenting. When I see `colors.find` I know what to expect without a comment: we'll be picking out a single entry from our array. When I see `for (let i = 0; i < colors.length; i++)`, however, I only know that we'll be looping over the array.
 
-2) The given code is a "toy" example. As soon as the operation gets more complicated, our code is likely to blow up.
+2. The given code is a "toy" example. As soon as the operation gets more complicated, our code is likely to blow up.
 
-3) The array methods reinforce immutability. It's a lot harder to write code that accidentally changes your array as you loop over it.
+3. The array methods reinforce immutability. It's a lot harder to write code that accidentally changes your array as you loop over it.
 
-4) The array methods are built to stack on each other. Imagine that you had to sort the array each entry's `value` before you got the first matching entry. In that case, tacking on a `.sort` before the `.find`  would keep our code concise and readable. (See point 2 above.)
+4. The array methods are built to stack on each other. Imagine that you had to sort the array each entry's `value` before you got the first matching entry. In that case, tacking on a `.sort` before the `.find` would keep our code concise and readable. (See point 2 above.)
+
+All things told, `.find` is the best option, especially if we're dealing with real code.
+
+## Wrap up
+
+So in the end, who's the winner? For me, the obvious answer is "**not** `Array.prototype.filter`." The filter method is super useful, but it is also meant for situations when we're expecting more than one result or for the result to be returned as an array. In our case, it is simply the wrong tool, and we end up spending mental energy, processing time, and characters to bend the tool to our uses.
+
+That said, in this specific example, I'd say, with a big caveat, that the most fitting solution is actually the classic `for` loop. I say this because:
+
+- it is absolutely clear what is going on in the code
+- we don't need to allocate an arrow function to memory, so why do it?
+- we are in control, using `break` of just how much code to run
+- the job that is called for doesn't require anything more than a for loop, and I'm not certain, but I'm pretty sure a for loop is more efficient than an array method
+
+Of course, I said that there's a caveat, and there are in fact several reasons to use Array.prototype.find. Consider the following:
+
+1. The "new" array methods like find, filter, map, some, and any are self documenting. When I see `colors.find` I know what to expect without a comment: we'll be picking out a single entry from our array. When I see `for (let i = 0; i < colors.length; i++)`, however, I only know that we'll be looping over the array.
+
+2. The given code is a "toy" example. As soon as the operation gets more complicated, our code is likely to blow up.
+
+3. The array methods reinforce immutability. It's a lot harder to write code that accidentally changes your array as you loop over it.
+
+4. The array methods are built to stack on each other. Imagine that you had to sort the array each entry's `value` before you got the first matching entry. In that case, tacking on a `.sort` before the `.find` would keep our code concise and readable. (See point 2 above.)
 
 All things told, `.find` is the best option, especially if we're dealing with real code.
 
 ## Related
 
-Read up on the Array methods over at MDN web docs. There are quite a few, but they basically replace your `for` loops with something built for the job. They're fantastic and I'd love to write a bit more about them when I have the chance.
+I'd suggest read up on the Array methods over at [MDN web docs](https://developer.mozilla.org/en-US/). The descriptions are excellent, and the code examples are quite helpful. There are quite a few of these methods, but they basically replace your `for` loops with something built for the job. They're fantastic and I'd love to write a bit more about them when I have the chance. Until then, maybe check whether [Chris Ferdinandi](https://gomakethings.com/articles/) has written up on them?
+
+The following methods apply a given function to each item in the array to synthesize something new. These are the hotness at the moment, and probably will continue to be. Once you figure them out, you'll see why.
+
+- 🔥[Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) - sorts the elements of an array in place based on the provided function and returns the sorted array
+- 🔥[Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) - executes a reducer function (that you provide) on each member of the array resulting in a single output value (you can, for example, add each value of an array together, etc.)
+- 🔥[Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - method creates a new array with the results of calling a provided function on every element in the calling array.
 
 The following array methods are all passed a test function which is applied to each element in an array; the method's return value tells you something about the array.
 
- - [Array.prototype.find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) - find the first element in an array which matches a test.
- - [Array.prototype.findIndex()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) – find and return the index of the first element in an array which matches a test.
- - [Array.prototype.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) – determine whether a value exists in the array which matches a test.
- - [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) – find all elements matching a test.
- - [Array.prototype.every()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) – determine if all elements in an array pass a test
- - [Array.prototype.some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) – determine if at least one element in an array passes a test
-
-The following methods apply a given function to each item in the array to synthesize something new:
-
- - [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) - sorts the elements of an array in place based on the provided function and returns the sorted array
- - [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) - executes a reducer function (that you provide) on each member of the array resulting in a single output value (you can, for example, add each value of an array together, etc.)
- - [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - method creates a new array with the results of calling a provided function on every element in the calling array.
-
+- [Array.prototype.find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) - find the first element in an array which matches a test.
+- [Array.prototype.findIndex()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) – find and return the index of the first element in an array which matches a test.
+- [Array.prototype.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) – determine whether a value exists in the array which matches a test.
+- [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) – find all elements matching a test.
+- [Array.prototype.every()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) – determine if all elements in an array pass a test
+- [Array.prototype.some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) – determine if at least one element in an array passes a test
