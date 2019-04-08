@@ -148,7 +148,7 @@ export default function Template({
         <meta property="og:image:width" content={coverImageWidth} />
         <meta property="og:image:height" content={coverImageHeight} />
         <meta property="twitter:image" content={coverImagePublicUrl} />
-
+        <meta property="og:type" content="article" />
         <meta
           name="keywords"
           content={
