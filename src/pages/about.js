@@ -9,9 +9,9 @@ const AboutPage = () => (
   <Layout>
     <Helmet>
       <html lang="en" />
-      <title>{`cborchert.blog - about`}</title>
-      <meta property="og:title" content={`cborchert.blog - about`} />
-      <meta property="twitter:title" content={`cborchert.blog - about`} />
+      <title>{`about | cborchert.blog`}</title>
+      <meta property="og:title" content={`about | cborchert.blog`} />
+      <meta property="twitter:title" content={`about | cborchert.blog`} />
       <meta
         name="description"
         content={

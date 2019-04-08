@@ -116,9 +116,9 @@ export default function Template({
   return (
     <Layout>
       <Helmet>
-        <title>{`cborchert.blog - ${title}`}</title>
-        <meta property="og:title" content={`cborchert.blog - ${title}`} />
-        <meta property="twitter:title" content={`cborchert.blog - ${title}`} />
+        <title>{`${title} | cborchert.blog`}</title>
+        <meta property="og:title" content={`${title} | cborchert.blog`} />
+        <meta property="twitter:title" content={`${title} | cborchert.blog`} />
         <meta
           name="description"
           content={
