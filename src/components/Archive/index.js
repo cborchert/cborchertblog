@@ -68,7 +68,7 @@ export const ArchiveFromProps = ({ posts }) => {
   return (
     <div className="archive">
       {posts
-        .filter(({ node }) => get(node, 'fields.publishPost', false))
+        .filter(({ node }) => !get(node, 'fields.isPostPrivate', true))
         .map(({ node }, i) => {
           // console.log(node)
           const path = get(node, 'fields.permalink', '#')
