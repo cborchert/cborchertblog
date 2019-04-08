@@ -62,7 +62,6 @@ export default function Template({
     'cover_image.childImageSharp.fluid',
     null
   )
-  console.log(frontmatter)
   const coverImagePublicUrl = `https://cborchert.blog${get(
     frontmatter,
     'cover_image.childImageSharp.fixed.src',
