@@ -139,30 +139,7 @@ const value = selectedColor && selectedColor.value
 console.log(value)
 ```
 
-The difference between this solution and the `filter` solution is slight but we're able to get rid of the useless `[0]`s and the problems that come with it. As a result, our code is more readable and more robust.
-
-## Wrap up
-
-So in the end, who's the winner? For me, the obvious answer is "not Array.prototype.filter." The filter method is super useful, but it is also meant for situations when we're expecting more than one result or for the result to be returned as an array. In our case, it is simply the wrong tool, and we end up spending mental energy, processing time, and characters to bend the tool to our uses.
-
-That said, in this specific example, I'd say, with a big caveat, that the most fitting solution is actually the classic for loop. I say this because:
-
-- it is absolutely clear what is going on in the code
-- we don't need to allocate an arrow function to memory, so why do it?
-- we are in control, using `break` of just how much code to run
-- the job that is called for doesn't require anything more than a for loop, and I'm not certain, but I'm pretty sure a for loop is more efficient than an array method
-
-Of course, I said that there's a caveat, and there are in fact several reasons to use Array.prototype.find. Consider the following:
-
-1. The "new" array methods like find, filter, map, some, and any are self documenting. When I see `colors.find` I know what to expect without a comment: we'll be picking out a single entry from our array. When I see `for (let i = 0; i < colors.length; i++)`, however, I only know that we'll be looping over the array.
-
-2. The given code is a "toy" example. As soon as the operation gets more complicated, our code is likely to blow up.
-
-3. The array methods reinforce immutability. It's a lot harder to write code that accidentally changes your array as you loop over it.
-
-4. The array methods are built to stack on each other. Imagine that you had to sort the array each entry's `value` before you got the first matching entry. In that case, tacking on a `.sort` before the `.find` would keep our code concise and readable. (See point 2 above.)
-
-All things told, `.find` is the best option, especially if we're dealing with real code.
+The difference between this solution and the `filter` solution is slight but we're able to get rid of the useless `[0]`'s and the problems that come with them. As a result, our code is more readable and more robust.
 
 ## Wrap up
 
