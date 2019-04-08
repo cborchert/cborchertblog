@@ -140,6 +140,16 @@ module.exports = {
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-54263803-2',
+        head: false,
+        anonymize: true,
+        respectDNT: true,
+        cookieDomain: 'cborchert.blog',
+      },
+    },
+    {
       resolve: `gatsby-plugin-node-fields`,
       options: {
         // Your list of descriptors
