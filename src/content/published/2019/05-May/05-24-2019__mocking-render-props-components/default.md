@@ -130,13 +130,11 @@ jest.mock('path/to/MyComponent', () => 'mock-my-component')
 I ended up going with something along the lines of
 
 ```javascript
-jest.mock(
-  './path/to/MyComponent',
-  ({ children, ...rest }) => (
-    <mock-my-component {...rest}>
-      {typeof children === 'function' ? '[Child as a function]' : null}
-    </mock-my-component>
-  )
+jest.mock('./path/to/MyComponent', ({ children, ...rest }) => (
+  <mock-my-component {...rest}>
+    {typeof children === 'function' ? '[Child as a function]' : null}
+  </mock-my-component>
+))
 ```
 
 This mock has the advantage of showing us all the properties we pass into the component, not throwing us a big error, and informing us in the case of a snapshot test, that we've passed a function in as a child to the component.
