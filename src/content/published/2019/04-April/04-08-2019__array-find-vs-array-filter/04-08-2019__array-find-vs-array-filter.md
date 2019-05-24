@@ -2,7 +2,7 @@
 title: 'For loop vs Array filter() vs Array find()'
 show_header: true
 cover_image: './wade-austin-ellis-721340-unsplash.jpg'
-date: 2019-04-06
+date: '2019-04-06'
 tags: ['javascript', 'array', 'programming tips']
 categories: ['articles']
 ---
