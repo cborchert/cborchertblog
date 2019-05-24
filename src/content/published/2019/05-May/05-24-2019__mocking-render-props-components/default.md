@@ -72,7 +72,7 @@ I've also set up a small [project on codepen](https://codesandbox.io/s/testing-r
 
 ## The error
 
-In my case, I ran into the following situation this week. I'm updating all the unit tests for my current client's rather large testing suite (701 test suites; 3296 individual tests -- yikes!) to fix all warnings and error outputs that occur during the testing process. These are often the result of using `i` as a key or not using a key at all, or not catching a Promise in the test, or that kind of bad practice thing that results in a passing test (and therefore successful pull requests), but indicates a problem either in the code or the tests.
+In my case, I ran into the following situation this week. I'm updating all the unit tests for my current client's rather large testing suite (701 test suites; 3296 individual tests -- yikes!) to fix all warnings and error outputs that occur during the testing process. These are often the result of using `i` as a key or not using a key at all, or not using `act` to wrap updates, or that kind of bad practice thing that results in a passing test (and therefore successful pull requests), but indicates a problem either in the code or the tests.
 
 One of these errors which I kept coming up against was:
 
