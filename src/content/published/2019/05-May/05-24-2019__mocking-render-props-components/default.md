@@ -27,13 +27,11 @@ So this little article, as the title says, is about how you might mock Render Pr
 Your mocks need to support having functions as children or you should use shallow rendering. I ended up replacing my basic mock with the following:
 
 ```javascript
-jest.mock(
-  './path/to/MyComponent',
-  ({ children, ...rest }) => (
-    <mock-my-component {...rest}>
-      {typeof children === 'function' ? '[Child as a function]' : children}
-    </mock-my-component>
-  )
+jest.mock('./path/to/MyComponent', ({ children, ...rest }) => (
+  <mock-my-component {...rest}>
+    {typeof children === 'function' ? '[Child as a function]' : children}
+  </mock-my-component>
+))
 ```
 
 ## Nota Bene
