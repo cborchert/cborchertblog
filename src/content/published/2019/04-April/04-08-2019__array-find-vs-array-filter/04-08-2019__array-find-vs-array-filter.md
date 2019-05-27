@@ -151,6 +151,7 @@ That said, in this specific example, I'd say, with a big caveat, that the most f
 - we don't need to allocate an arrow function to memory, so why do it?
 - we are in control, using `break` of just how much code to run
 - the job that is called for doesn't require anything more than a for loop, and I'm not certain, but I'm pretty sure a for loop is more efficient than an array method
+- It's faster. Check out [this JSPerf](https://jsperf.com/cb-js-for-vs-find-vs-filter).
 
 Of course, I said that there's a caveat, and there are in fact several reasons to use Array.prototype.find. Consider the following:
 
