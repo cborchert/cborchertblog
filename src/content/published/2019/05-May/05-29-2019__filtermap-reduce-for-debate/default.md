@@ -171,6 +171,10 @@ As interesting as the performance results are, we are talking about saving micro
 
 For the record, I think that reduce probably still has its place, but it's not to replace `.filter().map()`. I'd actually be hard-pressed to say that it should replace any given `for` loop since it's just about as descriptive as the for loop, and slower. For me, `reduce` shines when you can create reusable reducer functions that you need throughout your application, and you just need to drop in `myArray.reduce(myReducer, [])`. I'd love if someone could point out why we should use reduce more often!
 
+## Join the discussion!
+
+Head over to the [dev.to article](https://dev.to/cmborchert/the-great-iterate-debate-filter-map-reduce-or-for-1bjk) and leave a comment. I love me some feedback!
+
 ---
 
 _Cover Image Credits:_
